@@ -1,12 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {SearchBar} from './searchBar';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//create a react component
+class App extends Component {
+    state = {search:'initial text'}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    onFormSubmitted = e => {
+      this.setState({search: e});
+    }
+
+    render() {
+        return (
+          <div className="ui container" style={{marginTop:'10px'}}>
+            <SearchBar callBack={a => this.setState({search:a})} />
+            <div>
+              <label>Message: {this.state.search}</label>
+            </div>
+          </div>
+        );
+  }
+}
+
+//Take the raact component and show it on screen
+
+ReactDOM.render(<App/>, document.querySelector('#root'));
